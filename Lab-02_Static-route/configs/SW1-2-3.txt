@@ -1,0 +1,3 @@
+*I encourage you to set up the hostname, password, and other basic settings as practiced in Lab-01. However, for the sake of brevity, I’ll just focus "strictly" on the routing configuration 😉*
+
+*If you done setting up hostname, password and save the config. You've done here.*
