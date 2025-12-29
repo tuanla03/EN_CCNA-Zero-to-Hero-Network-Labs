@@ -15,7 +15,7 @@ The main objective of this repository is to improve my **documentation skills** 
 | ID | Lab Topic | Description | Status |
 | :---: | :--- | :--- | :---: |
 | 01 | [Basic device configure](./Lab-01_Basic-device-configure) | Navigating between common configuration modes, Configure Hostname, Password, IP Address and use Ping to test the connection. | ✅ Done |
-| 02 | [Static Route](./Lab-02-Static-route) | Static routing between different networks. | ⏳ In Progress |
+| 02 | [Static Route](./Lab-02_Static-route) | Static routing between different networks. | ⏳ In Progress |
 
 *Click on the Lab Topic to view details, topology, and configurations.*
 
@@ -27,3 +27,6 @@ To ensure compatibility, I use the following images in **EVE-NG 5.0.1-19-Communi
 * **L2 Switch:** `i86bi_Linux-L2-Adventerprisek9-ms.SSA.high_iron_20190423`
 * **L3 Switch:** `L2-ADVENTERPRISEK9-M-15.2-IRON-20151103`
 * **Router:** `i86bi_Linux-L3-AdvEnterpriseK9-M2_157_3_May_2018`
+
+
+*Note‼️: If you spot any mistakes or encounter issues with the content, please feel free to reach out to me via the social media links on my profile. I appreciate your feedback!*
