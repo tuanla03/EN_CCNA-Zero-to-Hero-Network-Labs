@@ -1,0 +1,5 @@
+ip 192.168.3.2/24 192.168.3.1
+
+ping 192.168.3.1 - Test connection between VPC3 and it default gateway
+
+*If you've done testing connection with the other VPCs. You don't need to do with this device, congratulation!*

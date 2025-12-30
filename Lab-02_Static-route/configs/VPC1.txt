@@ -1,0 +1,7 @@
+ip 192.168.1.2/24 192.168.1.1
+
+ping 192.168.1.1 - Test connection between VPC1 and it default gateway
+
+ping 192.168.2.2 - Test connection between VPC1 and VPC2 (After configure static route)
+
+ping 192.168.3.2 - Test connection between VPC1 and VPC3 (After configure static route)
