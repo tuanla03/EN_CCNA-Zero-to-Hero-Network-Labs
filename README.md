@@ -15,7 +15,8 @@ The main objective of this repository is to improve my **documentation skills** 
 | ID | Lab Topic | Description | Status |
 | :---: | :--- | :--- | :---: |
 | 01 | [Basic device configure](./Lab-01_Basic-device-configure) | Navigating between common configuration modes, Configure Hostname, Password, IP Address and use Ping to test the connection. | ✅ Done |
-| 02 | [Static Route](./Lab-02_Static-route) | Static routing between different networks. | ⏳ In Progress |
+| 02 | [Static route](./Lab-02_Static-route) | Static routing between different networks. | ⏳ In Progress |
+| 03 | [Path redundancy with AD & IP SLA](./Lab-03_Path-redundancy_AD_IP-SLA) | Static Route Redundancy using AD and IP SLA. | 📅 Planned |
 
 *Click on the Lab Topic to view details, topology, and configurations.*
 
@@ -29,4 +30,4 @@ To ensure compatibility, I use the following images in **EVE-NG 5.0.1-19-Communi
 * **Router:** `i86bi_Linux-L3-AdvEnterpriseK9-M2_157_3_May_2018`
 
 
-*Note‼️: If you spot any mistakes or encounter issues with the content, please feel free to reach out to me via the social media links on my profile. I appreciate your feedback!*
+*Note: If you spot any mistakes or encounter issues with the content, please feel free to reach out to me via the social media links on my profile. I appreciate your feedback!*
