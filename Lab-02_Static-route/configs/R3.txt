@@ -1,0 +1,46 @@
+*I encourage you to set up the hostname, password, and other basic settings as practiced in Lab-01. However, for the sake of brevity, I’ll just focus "strictly" on the routing configuration 😉*
+
+enable
+
+configure terminal
+
+interface e0/1
+
+ip address 192.168.23.2 255.255.255.0
+
+no shutdown
+
+exit
+
+interface e0/0
+
+ip add 192.168.3.1 255.255.255.0
+
+no shutdown
+
+exit
+
+ip route 192.168.1.0 255.255.255.0 192.168.23.1
+
+ip route 192.168.2.0 255.255.255.0 192.168.23.1
+
+ip route 192.168.12.0 255.255.255.0 192.168.23.1 - In case you want to reach the R1 or the 12 network.
+
+exit
+
+write - Save the config
+
+traceroute 192.168.1.2
+If your config was right, it should be display like this:
+
+Router#traceroute 192.168.1.2
+Type escape sequence to abort.
+Tracing the route to 192.168.1.2
+VRF info: (vrf in name/id, vrf out name/id)
+  1 192.168.23.1 0 msec 1 msec 0 msec
+  2 192.168.12.1 1 msec 0 msec 1 msec
+  3 192.168.1.2 1 msec 1 msec 1 msec
+
+- As you can see, the packet first reach the next hop (R2) of your static route config.
+- Then the R2 will search in it routing table to find if there is any path to the destination network (192.168.1.0). If there is a path, it will send the packet to the next hop (R1).
+- Finally, R1 identify that the destination (192.168.1.2) is directly connected with it and then delivery the packet to VPC1.
