@@ -1,0 +1,21 @@
+After configure IP Address and Static route with AD, use this command to see the path from VPC1 to VPC5:
+
+VPC1
+
+trace 192.168.5.2
+
+You will see that R1 will choose the path of interface e1/0. Then go to interface e1/0 of R1 and shut it down with this command:
+
+R1
+
+interface e1/0
+
+shutdown
+
+Then use VPC1 and repeat the command:
+
+VPC1
+
+trace 192.168.5.2
+
+You will see that it automatically choose the other path to reach R5. But the problem is when we turn off the R5 interface (e0/0), R1 don't automatically change to e1/1 which connect to interface e0/1 (the working interface) of R5 to send the packet. So we need a solution for this, IP SLA.
