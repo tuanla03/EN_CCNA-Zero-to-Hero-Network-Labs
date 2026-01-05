@@ -18,4 +18,4 @@ VPC1
 
 trace 192.168.5.2
 
-You will see that it automatically choose the other path to reach R5. But the problem is when we turn off the R5 interface (e0/0), R1 don't automatically change to e1/1 which connect to interface e0/1 (the working interface) of R5 to send the packet. So we need a solution for this, IP SLA.
+You will see that it automatically choose the other path to reach R5. But the problem is when we turn off the R5 interface (e0/0), R1 don't automatically change to e1/1 which connect to interface e0/1 (the working interface) of R5 to send the packet. So we need the solution for this, IP SLA.
