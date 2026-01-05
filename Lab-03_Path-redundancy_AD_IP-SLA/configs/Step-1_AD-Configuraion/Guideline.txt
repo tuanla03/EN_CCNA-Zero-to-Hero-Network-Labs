@@ -1,0 +1,7 @@
+1 Configure the basic setting such as hostname, password,...
+
+2 Assign IP Address to all the device interfaces according to the Topology/IP Addressing Table.
+
+3 Configure static route with Floating AD (Step1-Routers.txt).
+
+4 Verification test (Step1-Test.txt).
