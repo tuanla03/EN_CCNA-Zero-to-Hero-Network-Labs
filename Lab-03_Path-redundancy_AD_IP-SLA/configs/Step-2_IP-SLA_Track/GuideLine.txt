@@ -1,0 +1,9 @@
+1 Configure the basic setting such as hostname, password,...
+
+2 Assign IP Address to all the device interfaces according to the Topology/IP Addressing Table.
+
+3 Configure static route with Floating AD (Step2-Static-route.txt).
+
+4 Configure IP SLA and assign it with Track (Step2-IP-SLA-Track.txt)
+
+5 Verification test (Step2-Test.txt).
