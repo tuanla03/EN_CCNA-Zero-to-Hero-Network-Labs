@@ -1,0 +1,41 @@
+Well done! Now we testing it by first use VPC1 to trace to VPC4 with this command:
+
+VPC1
+
+trace 192.168.4.2
+
+We see the route to R4 via R2. Now we shut the interface e0/0 of R2 by this command:
+
+R2
+
+"Global Configure Mode"
+
+interface e0/0
+
+shutdown
+
+exit
+
+Now go back to VPC1 and repeat the first command:
+
+VPC1
+
+trace 192.168.4.2
+
+The command now successfully and the path is via R3. Now we turn on that interface to see if it could automatically switch to the prioritize path:
+
+R2
+
+"Global Configure Mode"
+
+interface e0/0
+
+no shutdown
+
+exit
+
+Test it in VPC1 with the same command:
+
+trace 192.168.4.2
+
+Note: If you see it still use the route via R3, wait for at least 10 second (time between the ping to test connection that we configure in ip sla). After at least 10 second, it'd be change back to the route via R2.
