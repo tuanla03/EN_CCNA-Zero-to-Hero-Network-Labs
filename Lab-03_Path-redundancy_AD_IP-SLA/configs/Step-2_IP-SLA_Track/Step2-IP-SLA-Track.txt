@@ -1,0 +1,49 @@
+R1
+
+"at Global Configure Mode"
+
+ip sla 1 - create an ip sla with id is 1
+
+icmp-echo 192.168.24.2 source-interface e0/1 - alway test connection of the prioritize path
+
+frequency 10 - it'll send an ping to the destination ip per 10 seconds
+
+exit
+
+ip sla schedule 1 start-time now life forever - configure this ip sla 1 to keep it alway doing this
+
+track 1 ip sla 1 reachability - link track with id = 1 to ip sla 1 (because we can't assign ip sla to an static route so we need to link it with track and track can be assign with static route)
+
+exit
+
+no ip route 192.168.4.0 255.255.255.0 192.168.12.2 5 - delete the config that we want to assign track 1
+
+ip route 192.168.4.0 255.255.255.0 192.168.12.2 5 track 1 - assign track with static route
+
+----------
+
+Now we continue configure ip sla for R4. In case of you didn't know, when we want to ping to someone, you'll send an icmp-echo request to they and if they could receive it, they'll send back a icmp-echo reply to you, and it complete a trip when you receive that packet. So if you can send to them and they can't send to you, it's a drop. So we now test by shuting down the e0/0 of R2, the R1 must automatically change the path to R4 via R3 but R4 still sending icmp-echo reply packet via 192.168.24.1 same as we said in the end of step 1, AD configuration just only known it output port status. That's why we need to configure ip sla for R4.
+
+"Remember to turn on the e0/0 of R2 if you shut it down"
+
+R4
+
+"at Global Configure Mode"
+
+ip sla 1 - the id of every routers is unique, you can use any number within the allowable range, remember not to use same number in 1 router
+
+icmp-echo 192.168.12.1 source-ip 192.168.24.2 - same as we configure for R1 but using ip add instead of interface
+
+frequency 10
+
+exit
+
+ip sla schedule 1 start-time now life forever
+
+track 1 ip sla 1 reachability
+
+exit
+
+no ip route 192.168.1.0 255.255.255.0 192.168.24.1 5
+
+ip route 192.168.1.0 255.255.255.0 192.168.24.1 5 track 1
