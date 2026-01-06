@@ -1,0 +1,39 @@
+*Note: Basic settings from previous labs are omitted to focus on IP SLA and Redundancy. I highly recommend you configure them manually to keep your skills sharp! "Efficiency first! :)"*
+
+R1
+
+ip route 192.168.4.0 255.255.255.0 192.168.12.2 5 - AD = 5 so R1 will prioritizing this route to reach R4.
+
+ip route 192.168.4.0 255.255.255.0 192.168.13.2 10 - AD = 10 so if the route to R4 via R2 is down, it will automatically choose this path.
+
+ip route 192.168.24.0 255.255.255.0 192.168.12.2 - for sla
+
+----------
+
+R2
+
+ip route 192.168.1.0 255.255.255.0 192.168.12.1
+
+ip route 192.168.4.0 255.255.255.0 192.168.24.2
+
+----------
+
+R3
+
+ip route 192.168.1.0 255.255.255.0 192.168.13.1
+
+ip route 192.168.4.0 255.255.255.0 192.168.34.2
+
+----------
+
+R4
+
+ip route 192.168.1.0 255.255.255.0 192.168.24.1 5 - Same as R1
+
+ip route 192.168.1.0 255.255.255.0 192.168.34.1 10 - Same as R1
+
+ip route 192.168.12.0 255.255.255.0 192.168.24.1
+
+----------
+
+After configure routing, try to ping between VPCS to test the connection.
