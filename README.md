@@ -17,7 +17,7 @@ The main objective of this repository is to improve my **documentation skills** 
 | 01 | [Basic device configure](./Lab-01_Basic-device-configure) | Navigating between common configuration modes, Configure Hostname, Password, IP Address and use Ping to test the connection. | ✅ Done |
 | 02 | [Static route](./Lab-02_Static-route) | Static routing between different networks. | ✅ Done |
 | 03 | [Path redundancy with AD & IP SLA](./Lab-03_Path-redundancy_AD_IP-SLA) | Static Route Redundancy using AD and IP SLA. | ✅ Done |
-| 04 | [VLAN, Trunking and VTP configuration](./Lab-04_VLAN_Trunking_VTP) | VLAN, Trunking and VTP configuration. | 📅 Planned |
+| 04 | [VLAN, Trunking and VTP configuration](./Lab-04_VLAN_Trunking_VTP) | VLAN, Trunking and VTP configuration. | ⏳ In Progress |
 
 *Click on the Lab Topic to view details, topology, and configurations.*
 
