@@ -1,0 +1,39 @@
+*Note: Basic settings from previous labs are omitted to focus on VLAN, Trunk port and VTP. I highly recommend you configure them manually to keep your skills sharp! "Efficiency first! :)"*
+
+We only configure trunk port on the interfaces between switch to ensure the confidentiality of our network. Just thing if a guy can access to multiple VLANs of your network, he can change his ip to match that network and so that he can access to other devices.
+
+SW1
+
+"Stand in Global Config Mode"
+
+int e0/0
+
+switchport trunk encapsulation dot1q
+
+switchport mode trunk
+
+exit
+
+----------
+
+SW2
+
+"Stand in Global Config Mode"
+
+int e0/0
+
+switchport trunk encapsulation dot1q
+
+switchport mode trunk
+
+exit
+
+int e0/1
+
+switchport trunk encapsulation dot1q
+
+switchport mode trunk
+
+exit
+
+Now SW1 and SW2 can share vtp packet to each other via trunk port to synchronize VLAN database.
