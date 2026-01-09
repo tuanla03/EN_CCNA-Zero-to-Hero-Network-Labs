@@ -1,0 +1,182 @@
+*Note: Basic settings from previous labs are omitted to focus on VLAN, Trunk port and VTP. I highly recommend you configure them manually to keep your skills sharp! "Efficiency first! :)"*
+
+Note that every switch default setting are operate at vtp server mode but in SW1 i still want to repeat that step. You have to ensure that the revision number (check it in "show vtp status" in Privilege Config Mode of a switch) of switch server alway higher than the other to avoid overwrite. They don't actually know if it is the server or client, switch just simply know who have the latest update (revision number) to synchronize.
+
+SW1
+
+"Stand in Global Config Mode"
+
+vtp mode server
+
+vtp domain ccna
+
+vtp password cisco123
+
+exit
+
+----------
+
+SW2
+
+"Stand in Global Config Mode"
+
+vtp mode client
+
+vtp domain ccna
+
+vtp password cisco123
+
+In this lab SW1 are the VTP Server so we create VLANs on it.
+
+SW1
+
+"Stand on Global Config Mode"
+
+vlan 10 - Create vlan with id = 10
+
+name IT - name it
+
+exit
+
+vlan 20 - Repeat the command to create other VLANs
+
+name Sales
+
+exit
+
+vlan 30
+
+name Marketing
+
+exit
+
+Now we've done creating VLANs needed for this lab.
+
+Now try the command "show vlan" on Privilege EXEC Mode of SW2 to check the VLAN database. Once synchronized, we configure SW1 and SW2 interfaces that connect with VPCs to access port and only accept vlan 10 to test. Please note that you can use every ip address for both VPCs but make sure they in the same subnet.
+
+Because switch just transmit by put a tag in your data when sending between trunk port to say that "this packet belong to vlan 10", and the received switch will receive and only foward this packet to the interface that accept vlan 10. Then the destination VPC receive the packet.
+
+In case you are curious about why we have to make sure the VPC in the same subnet; it is because when sending ping to VPC2, VPC1 will notice that the ip of VPC2 is not  in the same subnet with it. Due to TCP/IP rule, VPC1 must send the packet to its default gateway to transmit data over network. In this lab, we didn't configure any router for it so VPC1 will drop that packet.
+
+SW1
+
+"Stand in Global Config Mode"
+
+int e0/1
+
+switchport mode access
+
+switchport access vlan 10
+
+exit
+
+----------
+
+SW2
+
+"Stand in Global Config Mode"
+
+int e0/2
+
+switchport mode access
+
+switchport access vlan 10
+
+exit
+
+Now we setup ip for VPCs:
+
+VPC1
+
+ip 192.168.10.1/24
+
+----------
+
+VPC2
+
+ip 192.168.10.2/24
+
+We should test the connection now:
+
+VPC1
+
+ping 192.168.10.2
+
+If your config was right, it would be success :)
+
+We didn't configure the SW3 so we must can't ping to VPC3, try it by set up ip for VPC3 and ping from VPC1:
+
+VPC3
+
+ip 192.168.10.3/24
+
+----------
+
+VPC1
+
+ping 192.168.10.3
+
+Yea, probably it can't. The SW3 didn't have vlan 10 and the interface connect to VPC3 is not access mode with vlan 10. Try the command below to check it:
+
+SW3
+
+"Stand in Privilege EXEC Mode"
+
+show vlan
+
+So what if we create a VLAN 10 in SW3 without synchronize to other switches and configure the e0/0 to access port (accept only vlan 10 same as other switch). Did it work ?
+
+SW3
+
+"Stand in Global Config Mode"
+
+vlan 10
+
+exit
+
+int e0/0
+
+switchport mode access
+
+switchport access vlan 10
+
+exit
+
+Probably no too (you can try your self) but it is because we didn't configure the e0/1 of SW3 to trunk port (it operate at access mode and accept only vlan 1 by default => packet that have vlan 10 tag can not pass through). Now we try turning it into trunk port and see what happen:
+
+SW3
+
+"Stand in Global Config Mode"
+
+int e0/1
+
+switchport trunk encapsulation dot1q
+
+switchport mode trunk
+
+exit
+
+This switch haven't join the domain yet, you can check by the command "show vtp status" in Privilege EXEC Mode. Now we gonna ping again and see if it success:
+
+VPC1
+
+ping 192.168.10.3
+
+Yea, it success. But why?
+
+As i mention before, the switch didn't know where is exactly the VPC3 are, it just receive the packet and forward to all the approved interfaces.
+
+Detail explaintion:
+
+First i want to make sure that you have the basic knowledge about ping and how switch operate:
+
++ When you run a ping command, your computer send a ICMP Echo Request packet to the target. If they could receive the request packet, they will send back aa ICMP Echo Reply. And after you receive the reply, it called a round trip.
+
++ When a switch receive data, it learn the source MAC address of that packet by put it in a MAC Address Table. Then switch checked it MAC address table if it know where is the destination MAC address. If the destination MAC address didn't match any in it table, switch will forward that packet to all appropriate interface except the source. After that, when it receive a packet that have the destination Mac address is already in the table, it know exactly where to forward the packet.
+
+Now we continue:
+
+The ping packet first get out from VPC1 then reach SW1, SW1 just have 2 working interfaces and one of them is the source (e0/1) so it send to the other (e0/0). SW2 operate exactly the same as SW1, it receive from e0/0 so it forward that packet to 2 other interfaces that accept vlan 10 (e0/1 and e0/2). VPC2 received the packet but the destination ip address are not it ip address so it drop the packet. The packet come out of interface e0/1 of SW2 now reach interface e0/1 of SW3. Switch 3 then forward to the other interface (e0/0) and the packet then reach VPC3. VPC3 noticed that the destination is it ip address so it receive and send back the ICMP Echo Reply. The way back is more simply, all the switches already know where is the VPC1 so the path of the reply packet is:
+VPC3-eth0 -> e0/0-SW3-e0/1 -> e0/1-SW2-e0/0 -> e0/0-SW1-e0/1 -> eth0-VPC1
+
+Know you have the basic knowledge about switching, try to do this lab in your way, discover problem and complete the theory 😉
