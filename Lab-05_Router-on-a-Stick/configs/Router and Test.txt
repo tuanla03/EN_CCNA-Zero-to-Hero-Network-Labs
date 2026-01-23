@@ -1,0 +1,39 @@
+*Note: Basic settings from previous labs are omitted to focus on this lab. I highly recommend you configure them manually to keep your skills sharp! "Efficiency first! :)"*
+
+In the previous lab, we've learned that switches use VLAN tags to separate traffic. However, a standard router interface does not understand these tags by default.
+
+If we connect a router to a switch via a single cable, the router needs a way to distinguish which packet belongs to which VLAN. This is where the 802.1Q (dot1q) encapsulation comes in.
+
+By configuring sub-interfaces with dot1q, we allow the router to:
+
+* Identify the VLAN tags sent from the switch. *
+* Act as a Default Gateway for multiple VLANs at the same time using only one physical port. *
+* Route packets between different networks (Inter-VLAN Routing) so that VPC1, VPC2, and VPC3 can finally communicate with each other. *
+
+"Stand in Global Config Mode"
+
+int e0/0 - shorter version of "interface".
+
+ip add 192.168.1.1 255.255.255.0 - shorter version of "ip address".
+
+no shut - shorter version of "no shutdown".
+
+int e0/0.2 - move to Sub-interface Config Mode.
+
+encapsulation dot1q 2 - 2 indicates VLAN 2, the VLAN id which this sub-interface act as the default gateway.
+
+ip add 192.168.2.1 255.255.255.0
+
+There is no need for "no shutdown" for this sub-interface, just remember to turn on the main interface (e0/0).
+
+int e0/0.3
+
+encapsulation dot1q 3
+
+ip add 192.168.3.1 255.255.255.0
+
+exit
+
+Now its all your. Use every think you've learned to test the connection of the VPCs.
+
+If your configuration was right, every VPC could connect to each other 😉.
