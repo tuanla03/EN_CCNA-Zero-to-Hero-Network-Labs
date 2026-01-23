@@ -1,0 +1,49 @@
+*Note: Basic settings from previous labs are omitted to focus on this lab. I highly recommend you configure them manually to keep your skills sharp! "Efficiency first! :)"*
+
+In this switch, we'll create the VLAN 2 and VLAN 3 ( VLAN 1 is the default VLAN ). Then configure a trunk link between the switch and the router to transmit data of multiple VLANs and ofcourse configure the interfaces connected to the VPCs to access port with the appropriate VLAN.
+
+"Stand in Global Config Mode"
+
+vlan 2
+
+vlan 3
+
+exit
+
+do show vlan - To verify your configuration. ( we use "do" before the show command to execute it in Global Config Mode )
+
+interface e0/1
+
+switchport mode access
+
+switchport access vlan 1
+
+interface e0/2 - There is no need to exit to the Global Config Mode, we can move between VLAN Config Mode directly.
+
+switchport mode access
+
+switchport access vlan 2
+
+int e0/3 - Note that we can write a shorter version of the command as well as the IOS could understand :)
+
+switchport mode access
+
+switchport access vlan 3
+
+exit
+
+int e0/0
+
+switchport trunk encapsulation dot1q
+
+switchport mode trunk
+
+exit
+
+To verify it, we use:
+
+"Stand in Privilege EXEC Mode"
+
+show vlan - to see if the VLAN are assign to the appropriate interfaces
+
+sh int tr - as i mention before, we can write a shorter version of the command. So the fully command is "show interfaces trunk", use it to verify that we configured trunking link in the correct interface.
