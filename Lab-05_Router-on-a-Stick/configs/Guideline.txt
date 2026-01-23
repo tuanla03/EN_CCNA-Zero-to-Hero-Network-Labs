@@ -1,0 +1,1 @@
+This lab does not depend on a specific order. You can configure what you like first, but make sure you've done every think before testing.
