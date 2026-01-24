@@ -8,7 +8,7 @@
 
 ## 2. Lab Objectives
 
-* Inter-VLAN Routing with SVI: Replace Router by a Multilayer Switch (Layer 3 Switch), configure virtual interface (SVI) to act as the default gateway.
+* Inter-VLAN Routing with SVI: Replace Router with a Multilayer Switch (Layer 3 Switch), configure virtual interface (SVI) to act as the default gateway.
 
 
 ## 3. VLAN database
