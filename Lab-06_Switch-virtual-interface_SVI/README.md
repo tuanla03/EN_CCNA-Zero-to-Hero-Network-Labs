@@ -15,7 +15,7 @@
 
 | VLAN ID | VLAN Name | IP Address |
 | :---: | :--- | :---: |
-| VLAN 1 | IT | 192.168.1.1/24 |
+| VLAN 1 | default VLAN | 192.168.1.1/24 |
 | VLAN 2 | Sales | 192.168.2.1/24 |
 | VLAN 3 | Guest | 192.168.3.1/24 |
 
