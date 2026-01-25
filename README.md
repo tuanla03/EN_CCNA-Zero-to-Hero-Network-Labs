@@ -19,7 +19,8 @@ The main objective of this repository is to improve my **documentation skills** 
 | 03 | [Path redundancy with AD & IP SLA](./Lab-03_Path-redundancy_AD_IP-SLA) | Static Route Redundancy using AD and IP SLA. | ✅ Done |
 | 04 | [VLAN, Trunking and VTP configuration](./Lab-04_VLAN_Trunking_VTP) | VLAN, Trunking and VTP configuration. | ✅ Done |
 | 05 | [Inter-VLAN Routing with Router-on-a-Stick](./Lab-05_Router-on-a-Stick) | Inter-VLAN Routing with Router-on-a-Stick. | ✅ Done |
-| 06 | [Inter-VLAN Routing with SVI](./Lab-06_Switch-virtual-interface_SVI) | Inter-VLAN Routing with Switch Virtual Interface (SVI). | ⏳ In Progress |
+| 06 | [Inter-VLAN Routing with SVI](./Lab-06_Switch-virtual-interface_SVI) | Inter-VLAN Routing with Switch Virtual Interface (SVI). | ✅ Done |
+| 07 | [DHCP Relay Agent](./Lab-07_DHCP-Relay-Agent) | Configure DHCP Relay Agent on Cisco router. | 📅 Planned |
 
 *Click on the Lab Topic to view details, topology, and configurations.*
 
