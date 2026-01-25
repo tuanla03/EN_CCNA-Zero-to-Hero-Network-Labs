@@ -1,0 +1,63 @@
+*Note: Basic settings from previous labs are omitted to focus on this lab. I highly recommend you configure them manually to keep your skills sharp! "Efficiency first! :)"*
+
+VLAN 1 is the default vlan, so we don't need to create it and can't change its name.
+
+"Stand in Global Config Mode"
+
+vlan 2
+
+name Sales
+
+vlan 3 - We can move between VLAN Config Mode without going back to Global Config Mode.
+
+name Guest
+
+Next thing we are going to do is assign VLAN to the appropriate interface.
+
+"Stand in Global Config Mode"
+
+int e0/1
+
+switchport mode access
+
+switchport access vlan 1
+
+int e0/2
+
+switchport mode access
+
+switchport access vlan 2
+
+int e0/3
+
+switchport mode access
+
+switchport access vlan 3
+
+exit
+
+ip routing - enable routing on a Layer 3 Switch.
+
+int vlan 1 - create a Switched Virtual Interface (SVI) for Inter-VLAN routing.
+
+ip add 192.168.1.1 255.255.255.0 - assign an ip address to this virtual interface.
+
+no shut - Same as router interface, its default setting is shutdown.
+
+int vlan 2 - Ofcourse we can move between Interface Config Mode without going back to the Global Config Mode.
+
+ip add 192.168.2.1 255.255.255.0
+
+no shut
+
+int vlan 3
+
+ip add 192.168.3.1 255.255.255.0
+
+no shut
+
+exit
+
+You may notice that you can ping to other VLAN ip but can't ping to the equivalent VPCs. Don't worry, if you could ping to the other VLAN ip; it tells that the "ip routing" command works properly. 
+
+The configuration is technically correct and verified. However, potential software bugs in EVE-NG may cause this error, i also try the same setup and it works perfectly in Cisco Packet Tracer 😉.
