@@ -12,7 +12,7 @@ The main objective of this repository is to improve my **documentation skills** 
 
 ### 📂 Lab Index
 
-| ID | Lab Topic | Description | Status |
+| ID | Lab Topic | Brief Description | Status |
 | :---: | :--- | :--- | :---: |
 | 01 | [Basic device configure](./Lab-01_Basic-device-configure) | Navigating between common configuration modes, Configure Hostname, Password, IP Address and use Ping to test the connection. | ✅ Done |
 | 02 | [Static route](./Lab-02_Static-route) | Static routing between different networks. | ✅ Done |
@@ -20,7 +20,8 @@ The main objective of this repository is to improve my **documentation skills** 
 | 04 | [VLAN, Trunking and VTP configuration](./Lab-04_VLAN_Trunking_VTP) | VLAN, Trunking and VTP configuration. | ✅ Done |
 | 05 | [Inter-VLAN Routing with Router-on-a-Stick](./Lab-05_Router-on-a-Stick) | Inter-VLAN Routing with Router-on-a-Stick. | ✅ Done |
 | 06 | [Inter-VLAN Routing with SVI](./Lab-06_Switch-virtual-interface_SVI) | Inter-VLAN Routing with Switch Virtual Interface (SVI). | ✅ Done |
-| 07 | [DHCP Relay Agent](./Lab-07_DHCP-Relay-Agent) | Configure DHCP Relay Agent on Cisco router. | 📅 Planned |
+| 07 | [DHCP Relay Agent](./Lab-07_DHCP-Relay-Agent) | Configure DHCP Relay Agent on Cisco router. | ⏳ In Progress |
+| 08 | [Spanning Tree Protocol](./Lab-08_Spanning-tree-protocol_STP) | Configuring Spanning Tree Protocol (STP) to prevent Layer 2 loops and manage Root Bridge election. | 📅 Planned |
 
 *Click on the Lab Topic to view details, topology, and configurations.*
 
