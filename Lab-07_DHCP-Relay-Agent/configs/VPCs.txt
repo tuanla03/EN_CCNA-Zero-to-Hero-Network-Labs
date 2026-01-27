@@ -1,0 +1,11 @@
+VPC1
+
+ip dhcp - to get an ip address via dhcp
+
+ip dhcp -x - to release the address
+
+VPC2
+
+ip dhcp - to get an ip address via dhcp
+
+ip dhcp -x - to release the address
