@@ -1,0 +1,72 @@
+*Note: Basic settings from previous labs are omitted to focus on this lab. I highly recommend you configure them manually to keep your skills sharp! "Efficiency first! :)"*
+
+First, you have to assign the ip address to all equivalent interfaces of 2 Routers. You must do this your self to sharpen your skills; so i don't give any instruct of basic command anymore.
+
+Next, we are going to configure Router 1 as a DHCP Server:
+
+"Stand in Global Config Mode"
+
+ip dhcp pool POOL1 - create an DHCP Pool and name it POOL1
+
+network 192.168.1.0 - define the network range for the pool.
+
+default-router 192.168.1.1 - set the default gateway for the devices in this pool so they can communicate with other networks.
+
+dns-server 8.8.8.8 - we don't have any DNS Server here so i just use a common DNS Server.
+
+exit
+
+ip dhcp pool POOL2
+
+network 192.168.2.0
+
+default-router 192.168.2.1
+
+dns-server 8.8.8.8
+
+exit
+
+ip dhcp excluded-address 192.168.1.1 192.168.1.10 - if you want to leave some ip address to manual assign it later, you can use this command to prevent the router automatically assign it to other devices via DHCP.
+
+ip dhcp excluded-address 192.168.2.2 - if you want to leave a specific ip address such as 192.168.2.2, you can use this command too.
+
+Now you are ready to give an ip address to VPC1 via DHCP. Try it by type this in VPC1:
+
+ip dhcp
+
+If your config was right, VPC1's ip address should be 192.168.1.11.
+
+Why don't you try that command in VPC2? Its not working right?
+
+This is the brief explain for this:
+When a client tries to receive an IP address via DHCP, it broadcasts a Discover packet. When this packet is received by a DHCP Server, the server replies by sending an Offer to inform about the address it can give. The client then sends a Request packet to accept the Offer. Finally, the server sends an Acknowledge packet to confirm the client's request. You can see it as "DORA" messages when configure VPC1 to receive ip address via DHCP.
+
+However, the broadcast is limited to a subnet (Router 2 doesn't forward it to other subnets). Consequently, Router 1 (the DHCP Server) never receives the Discover packet from VPC2, which leads to VPC2 being unable to receive an IP address via DHCP.
+
+And then the term "DHCP Relay Agent" comes up. It allows communication between DHCP Client and Server over subnet.
+
+Now we back to R2:
+
+"Stand in Global Config Mode"
+
+int e0/0
+
+ip dhcp helper-address 10.0.0.1 - tell the router to forward DHCP broadcast packets as unicast to the DHCP Server's IP address.
+
+Make sure you are standing in the correct interface (the gateway interface of the client) when typing this command. If you use this command on interface e0/1, nothing will happen because e0/0 is the interface that receives the broadcast message from the client; and that message cannot be forwarded to other subnets (even if in the same router).
+
+Now try again with the VPC2:
+
+VPC2
+
+ip dhcp
+
+Still can't? It is because R2 can forward Discovery packet to R1 but R1 didn't know the 192.168.2.0 network to answer. So we need to configure a route to that network on R1.
+
+R1
+
+"Stand in Global Config Mode"
+
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+
+Be cause the R2 already know where to find R1 (directly connected) so we don't need to configure route on R2. If you config was right, the VPC2 should received an ip address via DHCP.
