@@ -3,7 +3,7 @@
 
 ## 1. Topology Diagram
 
-[Network Topology](topology_lab-01.png)
+![Network Topology](topology_lab-01.png)
 
 
 ## 2. Lab Objectives
